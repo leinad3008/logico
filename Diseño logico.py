@@ -1,5 +1,8 @@
 ###Progra de Diseño logico
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 #funciones definidas:
 def ToBin(num, let): #pasa el numero octal a binario
     q=len(let)
@@ -116,7 +119,7 @@ def Nrz(bina):
         
     for ele in range(1,len(lista)):
         Datos_Nrz=Datos_Nrz+lista[ele]
-    return Datos_Nrz
+    return lista
 
 
 
@@ -156,6 +159,14 @@ def valid(ent, Largo): #valida que sea de 4 digitos, que este dentro del rango y
             print("El número no es valido")
             menu()
 
+def Nrzi(data):
+    xs = np.repeat(range(len(data)), 2)
+    ys = np.repeat(data, 2)
+    xs = xs[1:]
+    ys = ys[:-1]
+    plt.plot(xs, ys)
+    plt.ylim(-0.5, 1.5)
+    plt.show()
 
 #programa principal 
 
@@ -179,6 +190,7 @@ def menu():
 
         dato=Nrz(NumBin)
         print("Dato en Nrz:",dato)
+        Nrzi(dato)
         
         submenu()
         
