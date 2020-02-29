@@ -4,6 +4,136 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #funciones definidas:
+
+def ValidParidad():
+    paridad=int(input("--->"))
+    if paridad==1:
+        print("Escogio paridad par")
+    elif paridad==0:
+        print("Escogio paridad impar")
+    else:
+        print("opción invalida")
+        ValidParidad()
+    return paridad
+        
+
+def Tabla_1(lista,par,bina):
+    lista[1][3]=bina[0]
+    lista[1][5]=bina[1]
+    lista[1][6]=bina[2]
+    lista[1][7]=bina[3]
+    lista[1][9]=bina[4]
+    lista[1][10]=bina[5]
+    lista[1][11]=bina[6]
+    lista[1][12]=bina[7]
+    lista[1][13]=bina[8]
+    lista[1][14]=bina[9]
+    lista[1][15]=bina[10]
+    lista[1][17]=bina[11]
+    
+    lista[7][3]=bina[0]
+    lista[7][5]=bina[1]
+    lista[7][6]=bina[2]
+    lista[7][7]=bina[3]
+    lista[7][9]=bina[4]
+    lista[7][10]=bina[5]
+    lista[7][11]=bina[6]
+    lista[7][12]=bina[7]
+    lista[7][13]=bina[8]
+    lista[7][14]=bina[9]
+    lista[7][15]=bina[10]
+    lista[7][17]=bina[11]
+    
+    lista[2][3]=bina[0]
+    lista[2][5]=bina[1]
+    lista[2][7]=bina[3]
+    lista[2][9]=bina[4]
+    lista[2][11]=bina[6]
+    lista[2][13]=bina[7]
+    lista[2][15]=bina[9]
+    lista[2][17]=bina[11]
+
+    lista[3][3]=bina[0]
+    lista[3][6]=bina[2]
+    lista[3][7]=bina[3]
+    lista[3][10]=bina[5]
+    lista[3][11]=bina[6]
+    lista[3][14]=bina[8]
+    lista[3][15]=bina[9]
+
+    lista[4][5]=bina[1]
+    lista[4][6]=bina[2]
+    lista[4][7]=bina[3]
+    lista[4][12]=bina[6]
+    lista[4][13]=bina[7]
+    lista[4][14]=bina[8]
+
+    lista[5][9]=bina[4]
+    lista[5][10]=bina[5]
+    lista[5][11]=bina[6]
+    lista[5][12]=bina[7]
+
+    lista[6][17]=bina[11]
+
+    #if paridad==1:    La idea de esto es empezar aqui a sacar los bits de paridad
+     #   i=
+
+    #else:
+        
+    
+    for valor in lista:
+        print(valor)
+
+def Tabla_2(lista,par,bina):
+    lista[1][3]=bina[0]
+    lista[1][5]=bina[1]
+    lista[1][6]=bina[2]
+    lista[1][7]=bina[3]
+    lista[1][9]=bina[4]
+    lista[1][10]=bina[5]
+    lista[1][11]=bina[6]
+    lista[1][12]=bina[7]
+    lista[1][13]=bina[8]
+    lista[1][14]=bina[9]
+    lista[1][15]=bina[10]
+    lista[1][17]=bina[11]
+
+    lista[2][3]=bina[0]
+    lista[2][5]=bina[1]
+    lista[2][7]=bina[3]
+    lista[2][9]=bina[4]
+    lista[2][11]=bina[6]
+    lista[2][13]=bina[7]
+    lista[2][15]=bina[9]
+    lista[2][17]=bina[11]
+
+    lista[3][3]=bina[0]
+    lista[3][6]=bina[2]
+    lista[3][7]=bina[3]
+    lista[3][10]=bina[5]
+    lista[3][11]=bina[6]
+    lista[3][14]=bina[8]
+    lista[3][15]=bina[9]
+
+    lista[4][5]=bina[1]
+    lista[4][6]=bina[2]
+    lista[4][7]=bina[3]
+    lista[4][12]=bina[6]
+    lista[4][13]=bina[7]
+    lista[4][14]=bina[8]
+
+    lista[5][9]=bina[4]
+    lista[5][10]=bina[5]
+    lista[5][11]=bina[6]
+    lista[5][12]=bina[7]
+
+    lista[6][17]=bina[11]
+
+
+    for valor in lista:
+        print(valor)
+
+
 def ToBin(num, let): #pasa el numero octal a binario
     q=len(let)
     i=q-1
@@ -139,7 +269,7 @@ def submenu(): #submenu final que permite terminar el programa o continuar
     
 def valid(ent, Largo): #valida que sea de 4 digitos, que este dentro del rango y que sea octal
 
-    if len(Largo)<= 4:
+    if len(Largo)== 4:
         if ent < 0 or ent > 7777:
             print("El numero no es valido")
             menu()
@@ -175,11 +305,14 @@ def menu():
     
     try:
         
-        Octal= int(input("Ingrese un número en base octal de 4 digitos: ")) #carga el octal
+        Largo= str(input("Ingrese un número en base octal de 4 digitos: ")) #carga el octal
         
-        Largo= str(Octal) #pasa el numero a string
+        Octal= int(Largo) #lo pasa a int
         
         valid(Octal, Largo) #función valid
+        
+        Tabla1=[["","p1","p2","d1","p3","d2","d3","d4","p4","d5","d6","d7","d8","d9","d10","d11","p5","d12"],["Palabras de datos recibida(sin paridad):","","","","","","","","","","","","","","","","",""],["p1","","","","","","","","","","","","","","","","",""],["p2","","","","","","","","","","","","","","","","",""],["p3","","","","","","","","","","","","","","","","","",""],["p4","","","","","","","","","","","","","","","","",""],["p5","","","","","","","","","","","","","","","","",""],["Palabras de datos recibida(con paridad):","","","","","","","","","","","","","","","","",""]]
+        Tabla2=[["","p1","p2","d1","p3","d2","d3","d4","p4","d5","d6","d7","d8","d9","d10","d11","p5","d12","Prueba de paridad","Bit de paridad"],["Palabras de datos recibida:","","","","","","","","","","","","","","","","","","",""],["p1","","","","","","","","","","","","","","","","","","",""],["p2","","","","","","","","","","","","","","","","","","",""],["p3","","","","","","","","","","","","","","","","","","",""],["p4","","","","","","","","","","","","","","","","","","",""],["p5","","","","","","","","","","","","","","","","","","",""]]
 
         NumBin= str(ToBin(Octal, Largo)) #funcion ineficiente para pasar a binario y lo guarda en la una variable tipo int 
 
@@ -187,10 +320,18 @@ def menu():
         
         print("El número",Octal,"en binario es:",NumBin)
         print("El número",Octal,"en hexadecimal es:",NumHexa)
-
+        print("Qué tipo de paridad desea:")
+        print("0. impar")
+        print("1. par")
+        Paridad=ValidParidad()##escoge el tipo de paridad
         dato=Nrz(NumBin)
         print("Dato en Nrz:",dato)
-        Nrzi(dato)
+    
+        print("Tabla 1:")
+        Tabla_1(Tabla1,Paridad,NumBin)
+        print("Tabla 2:")
+        Tabla_2(Tabla2,Paridad,NumBin)
+        ###Nrzi(dato)
         
         submenu()
         
