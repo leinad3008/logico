@@ -297,7 +297,64 @@ def Nrzi(data):
     plt.plot(xs, ys)
     plt.ylim(-0.5, 1.5)
     plt.show()
-
+#####Hamming
+def NumParidad(l): 
+    for i in range(l): 
+        if(2**i >= l + i + 1):
+            return i 
+  
+  
+def esqueleto(NumBin, l): 
+    j = 0
+    k = 1
+    m = len(NumBin) 
+    NumHexa = '' 
+    for i in range(1, m + l + 1): 
+        if(i == 2**j): 
+            NumHexa = NumHexa + '0'
+            j += 1
+        else: 
+            NumHexa = NumHexa + NumBin[-1 * k] 
+            k += 1
+    return NumHexa[::-1] 
+  
+  
+def addparidad(NumHam, r): 
+    n = len(NumHam) 
+    for i in range(r): 
+        val = 0
+        for j in range(1, n + 1): 
+   
+            if(j & (2**i) == (2**i)): 
+                val = val ^ int(NumHam[-1 * j]) 
+       
+        NumHam = NumHam[:n-(2**i)] + str(val) + NumHam[n-(2**i)+1:]
+       
+    return NumHam
+  
+  
+def detectar_Error(NumHam, l): 
+    n = len(NumHam) 
+    res = 0
+    for i in range(l): 
+        val = 0
+        for j in range(1, n + 1): 
+            if(j & (2**i) == (2**i)): 
+                val = val ^ int(NumHam[-1 * j])
+        res = res + val*(10**i) 
+    return int(str(res), 2) 
+  
+def addError(NumHam,posicion):
+    lista=[]
+    NumHam2=""
+    for cont in range(0,len(NumHam)):
+        lista.append(NumHam[cont])
+    print(lista)
+    if posicion<=len(lista):
+        lista[-posicion]=str(int(lista[-posicion])^1)
+    for i in range(0,len(lista)):
+        NumHam2=NumHam2+lista[i]
+    return NumHam2
 #programa principal 
 
 
@@ -333,13 +390,43 @@ def menu():
         Tabla_2(Tabla2,Paridad,NumBin)
         ###Nrzi(dato)
         
+      
+  
+
+        l = len(NumBin) 
+        NumBit = NumParidad(l) 
+
+
+        NumHam = esqueleto(NumBin, NumBit) 
+
+
+        NumHam= addparidad(NumHam, NumBit) 
+        NumHamO=NumHam
+
+        print("Data transferred is " + NumHam)   
+  
+
+        boole=True
+        while boole==True:
+            posicion=int(input("Indique la posicion del error [1,17]: "))
+            if posicion>0 and posicion<18:
+                NumHam = addError(NumHam,posicion)
+                print("El dato original es:")
+                print(NumHamO)
+                print("El error en el dato es ")
+                print(NumHam)
+                Correccion = detectar_Error(NumHam, l)
+                print("La posicion del error es: " + str(Correccion))
+                boole= False
+            else:
+                print("Esa posicion, no es valida")
+
+        
         submenu()
         
     except ValueError:
         print("El valor no es valido")
         menu()
-        
-    
-    
 
-menu()
+
+
